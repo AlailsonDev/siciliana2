@@ -21,6 +21,9 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    screens: {
+                        'xs': '400px',
+                    },
                     colors: {
                         dark: '#050505',
                         card: '#0a0a0a',
@@ -122,37 +125,37 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80" alt="Pizza Hero" class="w-full h-full object-cover scale-110 opacity-50" id="hero-img">
             <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
         </div>
 
-        <div class="container mx-auto px-6 relative z-10 text-center">
+        <div class="container mx-auto px-4 xs:px-6 relative z-10 text-center flex flex-col items-center">
             <div class="flex justify-center mb-6" id="hero-badge">
-                <span class="glass px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                <span class="glass px-4 py-1.5 rounded-full text-[9px] xs:text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
                     A Autêntica Tradição Italiana em Jaboatão
                 </span>
             </div>
             
-            <h1 class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter mb-8 stagger-hero" id="hero-title">
+            <h1 class="font-display text-[2rem] xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] xs:leading-[0.85] tracking-tighter mb-8 stagger-hero w-full max-w-4xl" id="hero-title">
                 SABOR QUE <br> <span class="text-gradient">TRANSCENDE</span>
             </h1>
             
-            <p class="max-w-xl mx-auto text-base md:text-lg text-zinc-400 mb-10 stagger-hero leading-relaxed">
+            <p class="max-w-xl mx-auto text-sm xs:text-base md:text-lg text-zinc-400 mb-10 stagger-hero leading-relaxed">
                 Descubra por que a Siciliana é o destino favorito de Piedade para pizzas artesanais e massas sofisticadas.
             </p>
             
-            <div class="flex flex-col md:flex-row gap-4 justify-center items-center stagger-hero">
-                <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="bg-accent text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform animate-pulse-slow">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center stagger-hero w-full max-w-xs sm:max-w-none">
+                <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="w-full sm:w-auto bg-accent text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs xs:text-sm hover:scale-105 transition-transform animate-pulse-slow">
                     Fazer Pedido Agora
                 </a>
             </div>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden xs:block">
             <svg class="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
@@ -371,14 +374,14 @@
                 <div class="absolute inset-0 opacity-10">
                     <img src="https://images.unsplash.com/photo-1593504049359-74330189a3be?auto=format&fit=crop&q=80" alt="Pizza Pattern" class="w-full h-full object-cover">
                 </div>
-                <div class="relative z-10">
-                    <h2 class="font-display text-3xl md:text-6xl font-black mb-8">FOME DE <br>PERFEIÇÃO?</h2>
-                    <p class="text-white/90 text-lg max-w-xl mx-auto mb-10">Não perca tempo na cozinha. Peça agora e receba em casa o melhor da Itália em minutos.</p>
-                    <div class="flex flex-wrap justify-center gap-6">
-                        <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:scale-110 transition-transform">
+                <div class="relative z-10 flex flex-col items-center">
+                    <h2 class="font-display text-[1.8rem] xs:text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-tight">FOME DE <br>PERFEIÇÃO?</h2>
+                    <p class="text-white/90 text-sm xs:text-base md:text-lg max-w-xl mx-auto mb-10">Não perca tempo na cozinha. Peça agora e receba em casa o melhor da Itália em minutos.</p>
+                    <div class="flex flex-wrap justify-center gap-4 xs:gap-6">
+                        <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="bg-white text-black px-8 xs:px-10 py-4 xs:py-5 rounded-full font-black uppercase tracking-widest text-[10px] xs:text-xs hover:scale-110 transition-transform">
                             Pedir pelo Delivery
                         </a>
-                        <a href="tel:8133630904" class="border border-white/30 backdrop-blur-md px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-all">
+                        <a href="tel:8133630904" class="border border-white/30 backdrop-blur-md px-8 xs:px-10 py-4 xs:py-5 rounded-full font-black uppercase tracking-widest text-[10px] xs:text-xs hover:bg-white/10 transition-all">
                             Ligar: (81) 3363-0904
                         </a>
                     </div>
