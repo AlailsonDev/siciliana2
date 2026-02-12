@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Siciliana | Sabor Artesanal e Tradição Italiana</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050505',
+                        card: '#0a0a0a',
+                        accent: '#d97706', // Gold/Amber
+                        tomato: '#ef4444',
+                    },
+                    fontFamily: {
+                        display: ['Syne', 'Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Hide default scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 py-6 transition-all duration-300" id="header">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="font-display text-2xl font-extrabold tracking-tighter text-white">SICILIANA</span>
+                <div class="w-1.5 h-1.5 bg-accent rounded-full mb-1"></div>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide uppercase">
+                <a href="#menu" class="hover:text-accent transition-colors">Menu</a>
+                <a href="#diferenciais" class="hover:text-accent transition-colors">Diferenciais</a>
+                <a href="#sobre" class="hover:text-accent transition-colors">Sobre</a>
+                <a href="#avaliacoes" class="hover:text-accent transition-colors">Avaliações</a>
+            </nav>
+
+            <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="glass px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500">
+                Pedir Online
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80" alt="Pizza Hero" class="w-full h-full object-cover scale-110 opacity-50" id="hero-img">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="flex justify-center mb-6" id="hero-badge">
+                <span class="glass px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                    A Autêntica Tradição Italiana em Jaboatão
+                </span>
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter mb-8 stagger-hero" id="hero-title">
+                SABOR QUE <br> <span class="text-gradient">TRANSCENDE</span>
+            </h1>
+            
+            <p class="max-w-xl mx-auto text-base md:text-lg text-zinc-400 mb-10 stagger-hero leading-relaxed">
+                Descubra por que a Siciliana é o destino favorito de Piedade para pizzas artesanais e massas sofisticadas.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center stagger-hero">
+                <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="bg-accent text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform animate-pulse-slow">
+                    Fazer Pedido Agora
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- AUTHORITY MARQUEE -->
+    <section class="py-12 border-y border-white/5 bg-card/50">
+        <div class="marquee overflow-hidden">
+            <div class="marquee-content gap-20 py-4 items-center uppercase font-display italic font-semibold text-xl text-white/20 tracking-wider">
+                <span>⭐ 4.6 no Google</span>
+                <span>🔥 +1.500 Avaliações</span>
+                <span>🍕 Pizza de Lombinho</span>
+                <span>🍝 Lasanha Artesanal</span>
+                <span>🍷 Seleção de Vinhos</span>
+                <span>🍹 Coquetéis Exclusivos</span>
+                <span>⭐ 4.6 no Google</span>
+                <span>🔥 +1.500 Avaliações</span>
+                <span>🍕 Pizza de Lombinho</span>
+                <span>🍝 Lasanha Artesanal</span>
+                <span>🍷 Seleção de Vinhos</span>
+                <span>🍹 Coquetéis Exclusivos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENTO GRID DIFFERENTIATORS -->
+    <section id="diferenciais" class="py-24 container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="max-w-2xl">
+                <h2 class="font-display text-3xl md:text-5xl font-bold mb-6 reveal-up">O QUE NOS TORNA <span class="italic text-accent">ÚNICOS</span></h2>
+                <p class="text-zinc-400 text-base md:text-lg reveal-up">Mais do que uma pizzaria, uma experiência gastronômica completa que une o clássico italiano ao toque siciliano contemporâneo.</p>
+            </div>
+            <div class="reveal-up">
+                <span class="text-4xl font-display font-black text-accent">4.6/5</span>
+                <p class="text-xs uppercase tracking-widest font-bold text-zinc-500 mt-2">Satisfação do Cliente</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <!-- Delivery Feature -->
+            <div class="bento-item glass p-8 md:col-span-2 reveal-up h-[400px] flex flex-col justify-between group">
+                <div class="absolute inset-0 z-0 opacity-20 transition-opacity duration-700 group-hover:opacity-40">
+                    <img src="https://images.unsplash.com/photo-1628102422280-08204b9016e3?auto=format&fit=crop&q=80" alt="Delivery Service" class="w-full h-full object-cover grayscale">
+                </div>
+                <div class="relative z-10">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold">Logística de Elite</span>
+                    <h3 class="text-2xl font-bold mt-4 leading-tight">ENTREGA SEMPRE <br>DENTRO DO PRAZO</h3>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-zinc-400 text-sm mb-6">Sua pizza chega quente, fresca e exatamente quando prometemos. Sem desculpas.</p>
+                    <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids & Family -->
+            <div class="bento-item glass p-8 reveal-up h-[400px] flex flex-col justify-between group">
+                <div class="absolute inset-0 z-0 opacity-20">
+                    <img src="https://images.unsplash.com/photo-1566454544259-f4b94c3d758c?auto=format&fit=crop&q=80" alt="Kids Area" class="w-full h-full object-cover">
+                </div>
+                <div class="relative z-10">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold">Familiar</span>
+                    <h3 class="text-2xl font-bold mt-4">ESPAÇO KIDS & CARDÁPIO INFANTIL</h3>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-zinc-400 text-sm">O lugar perfeito para criar memórias com quem você mais ama.</p>
+                </div>
+            </div>
+
+            <!-- Cocktails -->
+            <div class="bento-item glass p-8 reveal-up h-[400px] flex flex-col justify-between overflow-hidden group">
+                <div class="absolute inset-0 z-0 scale-125 transition-transform duration-1000 group-hover:scale-100">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80" alt="Cocktails" class="w-full h-full object-cover opacity-30">
+                </div>
+                <div class="relative z-10">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold">Mixologia</span>
+                    <h3 class="text-2xl font-bold mt-4">COQUETÉIS <br>PREMIUM</h3>
+                </div>
+                <div class="relative z-10 text-[10px] font-bold uppercase tracking-widest underline decoration-accent underline-offset-8">Conheça a Carta</div>
+            </div>
+
+            <!-- Location with Map -->
+            <div class="bento-item glass reveal-up h-[300px] md:col-span-1 group relative overflow-hidden">
+                <!-- Map iframe with filters -->
+                <iframe 
+                    class="absolute inset-0 w-full h-full opacity-40 grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100" 
+                    src="https://maps.google.com/maps?q=Av.%20Bernardo%20Vieira%20de%20Melo,%201250%20-%20Piedade,%20Jaboat%C3%A3o%20dos%20Guararapes&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    marginheight="0" 
+                    marginwidth="0">
+                </iframe>
+                <!-- Info Overlay -->
+                <div class="relative z-10 p-6 h-full flex flex-col justify-between pointer-events-none">
+                    <div class="glass p-4 rounded-xl inline-block self-start border-white/10 backdrop-blur-md">
+                        <h3 class="text-xs font-bold uppercase tracking-widest">PIEDADE, JABOATÃO</h3>
+                        <p class="text-zinc-400 text-[10px] mt-1">Av. Bernardo Vieira de Melo, 1250</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Pizzaria+Siciliana+Jaboatão" target="_blank" class="pointer-events-auto bg-dark/90 backdrop-blur-sm px-4 py-2.5 rounded-full text-accent text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-accent hover:text-white transition-all w-fit shadow-2xl">
+                        Ver Rotas <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Best Sellers -->
+            <div class="bento-item bg-accent/10 p-8 reveal-up md:col-span-3 flex flex-col md:flex-row gap-10 items-center justify-between">
+                <div class="max-w-md">
+                    <span class="text-[10px] uppercase tracking-widest text-accent font-bold italic">Os Favoritos da Casa</span>
+                    <h3 class="text-3xl font-black mt-4 font-display">LASANHA & PIZZA DE LOMBINHO</h3>
+                    <p class="text-zinc-400 text-sm mt-4">Nossa lasanha artesanal e a famosa pizza de lombinho com catupiry são os pratos mais desejados de nossa cozinha.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+                    <div class="w-28 h-28 rounded-2xl overflow-hidden glass p-1 border-accent/20">
+                        <img src="https://images.unsplash.com/photo-1574894719354-88aaacb54cbf?auto=format&fit=crop&q=80" class="w-full h-full object-cover rounded-xl" alt="Lasanha">
+                    </div>
+                    <div class="w-28 h-28 rounded-2xl overflow-hidden glass p-1 border-accent/20">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&q=80" class="w-full h-full object-cover rounded-xl" alt="Pizza">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU PREVIEW / ABOUT -->
+    <section id="menu" class="py-24 bg-card relative overflow-hidden">
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="relative reveal-up">
+                <div class="aspect-square rounded-[2rem] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80" alt="Chef preparing pizza" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-10 -right-5 glass p-6 rounded-2xl hidden md:block max-w-[220px]">
+                    <div class="flex gap-1 mb-2">
+                        <span class="text-accent text-sm">★★★★★</span>
+                    </div>
+                    <p class="text-xs italic text-zinc-300">"Melhor pizza da região, massa crocante e recheio generoso."</p>
+                    <p class="text-[9px] uppercase font-bold text-zinc-500 mt-4">— Maria J., Cliente VIP</p>
+                </div>
+            </div>
+
+            <div class="reveal-up">
+                <h2 class="font-display text-4xl font-bold mb-8">A ARTE DA <br><span class="text-accent italic">CULINÁRIA SICILIANA</span></h2>
+                <p class="text-zinc-400 text-base mb-8 leading-relaxed">
+                    Nossa história começa com o amor pela verdadeira gastronomia italiana. Utilizamos ingredientes selecionados, técnicas tradicionais e um toque de modernidade em cada prato que sai de nosso forno a lenha.
+                </p>
+                
+                <ul class="space-y-4 mb-10">
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent">✔</div>
+                        <span class="font-bold text-sm">Massa de Fermentação Natural</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent">✔</div>
+                        <span class="font-bold text-sm">Molho de Tomates Pelati Italianos</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent">✔</div>
+                        <span class="font-bold text-sm">Carta de Vinhos Curada</span>
+                    </li>
+                </ul>
+
+                <a href="https://www.instagram.com/sicilianarestaurante" target="_blank" class="inline-flex items-center gap-4 text-white hover:text-accent transition-colors group">
+                    <span class="font-bold uppercase tracking-widest text-xs">Siga-nos no Instagram</span>
+                    <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="avaliacoes" class="py-24 container mx-auto px-6">
+        <h2 class="font-display text-4xl font-bold text-center mb-16 reveal-up">O QUE DIZEM NOSSOS <span class="italic text-accent">CLIENTES</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-2xl reveal-up">
+                <div class="text-accent text-xs mb-6">★★★★★</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Um ótimo lugar pra comer pizza e massa com ótimas bebidas. A Siciliana nunca decepciona!"</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800"></div>
+                    <div>
+                        <p class="font-bold text-xs">João P.</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Local Guide</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl reveal-up bg-accent/5 border-accent/20 scale-105">
+                <div class="text-accent text-xs mb-6">★★★★★</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Há opções de carnes brancas e peixes, vinho e sucos, cervejas. Tudo de altíssima qualidade."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800"></div>
+                    <div>
+                        <p class="font-bold text-xs">Renata S.</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Cliente Frequente</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-2xl reveal-up">
+                <div class="text-accent text-xs mb-6">★★★★☆</div>
+                <p class="text-zinc-300 italic mb-8 leading-relaxed text-base">"Ambiente bom, atendimento ágil e a pizza de lombinho é surreal de boa. Vale cada centavo."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-zinc-800"></div>
+                    <div>
+                        <p class="font-bold text-xs">Carlos M.</p>
+                        <p class="text-[9px] text-zinc-500 uppercase tracking-widest">Visitante</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-r from-accent to-tomato rounded-[3rem] p-10 md:p-20 text-center text-white overflow-hidden relative">
+                <div class="absolute inset-0 opacity-10">
+                    <img src="https://images.unsplash.com/photo-1593504049359-74330189a3be?auto=format&fit=crop&q=80" alt="Pizza Pattern" class="w-full h-full object-cover">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="font-display text-4xl md:text-6xl font-black mb-8">FOME DE <br>PERFEIÇÃO?</h2>
+                    <p class="text-white/90 text-lg max-w-xl mx-auto mb-10">Não perca tempo na cozinha. Peça agora e receba em casa o melhor da Itália em minutos.</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:scale-110 transition-transform">
+                            Pedir pelo Delivery
+                        </a>
+                        <a href="tel:8133630904" class="border border-white/30 backdrop-blur-md px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-all">
+                            Ligar: (81) 3363-0904
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-16 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="font-display text-2xl font-extrabold tracking-tighter text-white">SICILIANA</span>
+                        <div class="w-2 h-2 bg-accent rounded-full mb-1"></div>
+                    </div>
+                    <p class="text-zinc-500 max-w-sm mb-8 text-sm italic">
+                        "A autêntica experiência da gastronomia italiana no coração de Piedade."
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/sicilianarestaurante" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-[10px] uppercase tracking-widest mb-6">Menu Rápido</h4>
+                    <ul class="text-zinc-500 space-y-3 text-xs">
+                        <li><a href="#menu" class="hover:text-white transition-colors">Nosso Menu</a></li>
+                        <li><a href="#diferenciais" class="hover:text-white transition-colors">Diferenciais</a></li>
+                        <li><a href="https://deliverydireto.com.br/pizzaria-siciliana/pizzaria-siciliana" target="_blank" class="hover:text-white transition-colors">Fazer Pedido</a></li>
+                        <li><a href="#avaliacoes" class="hover:text-white transition-colors">Avaliações</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-[10px] uppercase tracking-widest mb-6">Contato</h4>
+                    <ul class="text-zinc-500 space-y-3 text-xs">
+                        <li>(81) 3363-0904</li>
+                        <li>Av. Bernardo Vieira de Melo, 1250</li>
+                        <li>Piedade, Jaboatão - PE</li>
+                        <li>CEP: 54410-010</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-10 text-zinc-600 text-[9px] uppercase tracking-widest font-bold">
+                <p>© 2026 PIZZARIA SICILIANA. TODOS OS DIREITOS RESERVADOS.</p>
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('glass', 'py-4');
+                header.classList.remove('py-6');
+            } else {
+                header.classList.remove('glass', 'py-4');
+                header.classList.add('py-6');
+            }
+        });
+
+        // Hero Entrance
+        const heroTimeline = gsap.timeline();
+        
+        heroTimeline.from('#hero-img', {
+            scale: 1.5,
+            duration: 2,
+            ease: 'power3.out'
+        })
+        .from('#hero-badge', {
+            y: -50,
+            opacity: 0,
+            duration: 1,
+            ease: 'back.out(1.7)'
+        }, "-=1.5")
+        .from('.stagger-hero', {
+            y: 100,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1,
+            ease: 'power4.out'
+        }, "-=1");
+
+        // Reveal animations on Scroll
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power3.out'
+            });
+        });
+
+        // Smooth reveal for images
+        gsap.utils.toArray('img').forEach(img => {
+            if (!img.id.includes('hero')) {
+                gsap.from(img, {
+                    scrollTrigger: {
+                        trigger: img,
+                        start: 'top 95%'
+                    },
+                    scale: 1.1,
+                    opacity: 0.8,
+                    duration: 1.5,
+                    ease: 'power2.out'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
